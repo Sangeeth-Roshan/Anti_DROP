@@ -1,0 +1,11 @@
+Student_ID,Attendance_%,CGPA_10,Backlogs,Credits_Earned,Credits_Attempted,Assignment_Submission_%,Average_Exam_Marks_%,Semester,Fee_Status,Scholarship,Previous_Academic_%,Course,Dropout
+STU001,92,9.1,0,24,24,96,88,2,Paid,Yes,91.5,CSE,0
+STU002,85,8.2,0,23,24,89,79,2,Paid,No,84.2,CSE,0
+STU003,68,6.4,2,19,24,72,61,2,Pending,No,70.8,CSE,1
+STU004,95,9.5,0,24,24,98,94,2,Paid,Yes,96.1,ECE,0
+STU005,78,7.3,1,21,24,81,68,2,Paid,Yes,76.4,CSE,0
+STU006,61,5.8,3,17,24,64,54,2,Pending,No,63.7,CSE,1
+STU007,88,8.7,0,24,24,93,85,2,Paid,Yes,89.3,ECE,0
+STU008,74,6.9,1,20,24,76,65,2,Paid,No,72.1,CSE,0
+STU009,97,9.7,0,24,24,100,96,2,Paid,Yes,98.2,ECE,0
+STU010,55,5.2,4,15,24,58,47,2,Pending,No,59.6,CSE,1

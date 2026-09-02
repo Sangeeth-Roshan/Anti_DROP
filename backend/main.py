@@ -304,7 +304,10 @@ async def upload_csv(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(400, f"Could not parse CSV: {e}")
 
-    # ── Validation ───────────────────────────────────────────
+    # ── Validation & Pre-cleaning ────────────────────────────
+    # Strip whitespace from column headers
+    df.columns = [c.strip() for c in df.columns]
+
     errors = []
     all_expected = set(NUMERIC_COLS + CATEGORICAL_COLS)
     provided     = set(df.columns)
@@ -317,14 +320,36 @@ async def upload_csv(file: UploadFile = File(...)):
     if extra:
         errors.append(f"Unexpected extra columns: {sorted(extra)}")
 
+    # Strip whitespace from categorical string columns before checking allowed values
+    for col in CATEGORICAL_COLS:
+        if col in df.columns:
+            df[col] = df[col].astype(str).str.strip()
+
+    # Gracefully normalize Dropout column if present (accepts 0/1 or No/Yes)
+    if TARGET_COL in df.columns:
+        def _norm_dropout(v):
+            if pd.isna(v):
+                return 0
+            s = str(v).strip().lower()
+            if s in ("1", "yes", "true", "y"):
+                return 1
+            elif s in ("0", "no", "false", "n"):
+                return 0
+            try:
+                return int(float(s))
+            except Exception:
+                return v
+        df[TARGET_COL] = df[TARGET_COL].apply(_norm_dropout)
+
     allowed = _schema.get("allowed_values", {})
     for col, vals in allowed.items():
         if col in df.columns:
-            invalid = set(df[col].dropna().unique()) - set(vals)
+            unique_vals = set(df[col].dropna().unique())
+            invalid = unique_vals - set(vals)
             if invalid:
                 errors.append(
                     f"Column '{col}' contains invalid values {sorted(invalid)}. "
-                    f"Allowed: {sorted(vals)}"
+                    f"Allowed values are strictly: {sorted(vals)}"
                 )
 
     if errors:
