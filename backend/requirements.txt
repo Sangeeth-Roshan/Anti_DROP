@@ -1,0 +1,21 @@
+# AntiDROP Backend Dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.8.2
+
+# ML / Data
+scikit-learn==1.5.2
+numpy==1.26.4
+pandas==2.2.3
+joblib==1.4.2
+
+# Explainability
+shap==0.46.0
+
+# Causal Inference
+dowhy==0.11.1
+econml==0.15.1
+
+# Plotting (for training script only)
+matplotlib==3.9.2

@@ -1,0 +1,48 @@
+{
+  "numeric_cols": [
+    "Attendance_%",
+    "CGPA_10",
+    "Backlogs",
+    "Credits_Earned",
+    "Assignment_Submission_%",
+    "Average_Exam_Marks_%",
+    "Semester",
+    "Previous_Academic_%"
+  ],
+  "categorical_cols": [
+    "Fee_Status",
+    "Scholarship",
+    "Course"
+  ],
+  "target_col": "Dropout",
+  "allowed_values": {
+    "Fee_Status": [
+      "Paid",
+      "Pending"
+    ],
+    "Scholarship": [
+      "No",
+      "Yes"
+    ],
+    "Course": [
+      "CIVIL",
+      "CSE",
+      "ECE",
+      "EEE",
+      "MECH"
+    ]
+  },
+  "dtypes": {
+    "Attendance_%": "float64",
+    "CGPA_10": "float64",
+    "Backlogs": "int64",
+    "Credits_Earned": "int64",
+    "Assignment_Submission_%": "float64",
+    "Average_Exam_Marks_%": "float64",
+    "Semester": "int64",
+    "Previous_Academic_%": "float64",
+    "Fee_Status": "str",
+    "Scholarship": "str",
+    "Course": "str"
+  }
+}
